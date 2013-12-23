@@ -1,0 +1,12 @@
+/* Sample file */
+
+{   
+   "server" : "irc.myserver.org",
+   "nick" : "MyBot",
+   "channels" : ["#MyChan"],
+   "admin" : "MyQNick",
+   "userName" : "MyBot",
+   "realName" : "IRC Bot in Node JS",
+   "qName" : "BotQAccount",
+   "qPassword" : "changeme"
+}
