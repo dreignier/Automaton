@@ -5,7 +5,7 @@ var bot = new ircbot(JSON.parse(fs.readFileSync('./config.json')));
 
 bot.connect();
 
-['command', 'google', 'kill', 'nick', 'ping', 'say', 'link'].forEach(function(command) {
+['command', 'google', 'kill', 'nick', 'ping', 'say', 'link', 'analyse', 'old', 'bookmark', 'admin', 'op', 'stream'].forEach(function(command) {
    require('./commands/' + command)(bot);
 });
 
