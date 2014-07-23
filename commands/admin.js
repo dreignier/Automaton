@@ -8,7 +8,7 @@ module.exports = function(bot) {
             return;
          }
          
-         if (context.args[0] === 'Bot@456') {
+         if (context.args[0] === bot.options.adminPassword) {
             bot.client.whois(context.from, function(info) {
                bot.admins.push(info.nick + '@' + info.host);
                bot.client.say(context.from, 'Ok');
