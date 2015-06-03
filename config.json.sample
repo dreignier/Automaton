@@ -1,5 +1,3 @@
-/* Sample file */
-
 {   
    "server" : "irc.myserver.org",
    "nick" : "MyBot",
