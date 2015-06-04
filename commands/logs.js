@@ -1,5 +1,7 @@
 var fs = require('fs'),
-   moment = require('moment');
+   moment = require('moment'),
+   web = require('../lib/web');
+
    
 module.exports = function(bot) {
 
@@ -70,4 +72,47 @@ module.exports = function(bot) {
       log(to, bot.options.nick + ' : ' + text);
    });
 
+   web.register(/^logs\//, function(url, req, res) {
+      url = url.split('/');
+
+      if (url.length < 5) {
+         res.writeHead(400, {'Content-Type': 'text/plain'});
+         res.end('Not enought parameters');
+         return;
+      }
+
+      var channel = url[1].toLowerCase(),
+          year = url[2],
+          month = url[3],
+          day = url[4];
+          path = directory + channel + '-' + year + '-' + month + '-' + day + '.log';
+
+      console.log('path : ', path);
+
+      fs.exists(path, function(exists) {
+         if (!exists) {
+            res.writeHead(404, {'Content-Type': 'text/plain'});
+            res.end('404 not found');
+         } else {
+            fs.readFile(path, function(err, data) {
+               if (err) {
+                  res.writeHead(500, {'Content-Type': 'text/plain'});
+                  res.end('Unable to read the log file, contact the administrator');
+                  return;
+               }
+
+               res.writeHead(200, {'Content-Type': 'text/plain'});
+               res.end(data);
+            });
+         }
+      });
+   });
+
+   bot.command({
+      name : ['logs'],
+      help : 'Donne le lien vers les logs du jour',
+      execute : function(context) {
+         this.say(context.to, 'Logs du jour : ' + bot.options.location + 'logs/' + context.to.toLowerCase() + '/' + moment().parse('YYYY/MM/DD'));
+      }
+   });
 };

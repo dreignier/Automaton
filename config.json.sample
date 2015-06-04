@@ -6,5 +6,7 @@
    "userName" : "MyBot",
    "realName" : "IRC Bot in Node JS",
    "qName" : "BotQAccount",
-   "qPassword" : "changeme"
+   "qPassword" : "changeme",
+   "port" : "8888",
+   "location" : "http://localhost:8888/"
 }
