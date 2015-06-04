@@ -1,12 +1,13 @@
 var ircbot = require('./lib/ircbot'),
-   fs = require('fs');
+    fs = require('fs'),
+    web = require('./lib/web');
 
 if (!fs.existsSync('./data')) {
   console.info('Creating the ./data directory');
   fs.mkdirSync('./data');
 }
 
-var bot = new ircbot(JSON.parse(fs.readFileSync('./config.json')));
+var bot = new ircbot(require('./config'));
 
 bot.connect();
 
@@ -24,3 +25,6 @@ bot.client.addListener('message', function(from, to, text, message) {
       bot.client.say(to, 'pong');
    }
 });
+
+web.setPort(bot.options.port);
+web.initialize();
