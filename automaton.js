@@ -26,5 +26,5 @@ bot.client.addListener('message', function(from, to, text, message) {
    }
 });
 
-web.setPort(bot.options.port);
+web.setPort(bot.options.webPort);
 web.initialize();

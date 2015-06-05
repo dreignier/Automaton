@@ -112,7 +112,7 @@ module.exports = function(bot) {
       name : ['logs'],
       help : 'Donne le lien vers les logs du jour',
       execute : function(context) {
-         this.say(context.to, 'Logs du jour : ' + bot.options.location + 'logs/' + context.to.toLowerCase() + '/' + moment().parse('YYYY/MM/DD'));
+         this.say(context.to, 'Logs du jour : ' + bot.options.location + 'logs/' + context.to.toLowerCase().replace('#', '') + '/' + moment().format('YYYY/MM/DD'));
       }
    });
 };
