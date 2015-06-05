@@ -33,14 +33,14 @@ module.exports = function(bot) {
       log(to, '* JOIN ' + nick);
    });
 
-   bot.client.addListener('quit', function() {
+   bot.client.addListener('quit', function(nick, reason, channels) {
       var message = '* QUIT ' + nick;
 
       if (reason) {
          message += ' : ' + reason;
       }
 
-      log(to, message);
+      log(channels[0], message);
    });   
 
    bot.client.addListener('part', function(to, nick, reason) {
