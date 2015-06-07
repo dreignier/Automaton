@@ -6,7 +6,6 @@ module.exports = function(bot) {
    bot.command({
       name : 'google',
       help : '<text> | Fait une recherche sur google avec <text> et donne le premier r\u00e9sultat',
-      //security : 'admin',
       execute : function(context) {
          if (context.args.length <= 0) {
             return;
