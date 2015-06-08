@@ -29,6 +29,14 @@ module.exports = function(bot) {
                var count = parseInt(dice[0] || '1', 10), 
                    faces = parseInt(dice[1] || '6', 10);
 
+               if (!count) {
+                  count = 1;
+               }
+
+               if (!faces) {
+                  faces = 6;
+               }
+
                if (faces > 999) {
                   faces = 999;
                }
