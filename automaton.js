@@ -11,7 +11,7 @@ var bot = new ircbot(require('./config'));
 
 bot.connect();
 
-var commands = 'command google kill nick ping say link analyse old bookmark admin op stream logs uptime';
+var commands = 'command google kill nick ping say link analyse old bookmark admin op stream logs uptime roll';
 
 commands.split(' ').forEach(function(command) {
    require('./commands/' + command)(bot);
