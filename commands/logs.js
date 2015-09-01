@@ -2,7 +2,7 @@ var fs = require('fs'),
    moment = require('moment'),
    web = require('../lib/web');
 
-   
+
 module.exports = function(bot) {
 
    var directory = './data/logs/';
@@ -14,12 +14,12 @@ module.exports = function(bot) {
    }
 
    var getLogPath = function(to) {
-      return directory + to.replace('#', '') + '-' + moment().format('YYYY-MM-DD') + '.log';
+      return directory + to.replace('#', '').toLowerCase() + '-' + moment().format('YYYY-MM-DD') + '.log';
    };
 
    var log = function(channel, text) {
       fs.appendFileSync(getLogPath(channel), '(' + moment().format('HH:mm:ss') + ') ' + text + '\n');
-   }
+   };
 
    bot.client.addListener('message', function(from, to, text) {
       log(to, from + ' : ' + text);
@@ -41,7 +41,7 @@ module.exports = function(bot) {
       }
 
       log(channels[0], message);
-   });   
+   });
 
    bot.client.addListener('part', function(to, nick, reason) {
       var message = '* PART ' + nick;
@@ -62,7 +62,7 @@ module.exports = function(bot) {
 
       log(to, message);
    });
-   
+
    bot.client.addListener('selfMessage', function(to, text) {
       // Never log messages to Q
       if (to.toLowerCase() == 'q@cserve.quakenet.org') {
@@ -86,8 +86,6 @@ module.exports = function(bot) {
           month = url[3],
           day = url[4];
           path = directory + channel + '-' + year + '-' + month + '-' + day + '.log';
-
-      console.log('path : ', path);
 
       fs.exists(path, function(exists) {
          if (!exists) {
