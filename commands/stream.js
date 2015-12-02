@@ -44,7 +44,7 @@ module.exports = function(bot) {
       }, function(error, response, body) {
          if (error) {
             console.dir(error);
-            bot.client.say(context.to, 'Erreur. Magus sale dev en carton, r\u00e9pare moi !');
+            //bot.client.say(context.to, 'Erreur. Magus sale dev en carton, r\u00e9pare moi !');
             return;
          }
          
@@ -58,7 +58,7 @@ module.exports = function(bot) {
          });
          
          return callback(stream.length ? stream[0] : false);
-      })
+      });
    };
 
   bot.command({
