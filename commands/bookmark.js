@@ -32,7 +32,7 @@ module.exports = function(bot) {
       }
    });
    
-   bot.command({
+   /*bot.command({
       name : ['bookmark.list', 'bm.list'],
       help : "Le bot donne la lise des bookmarks",
       execute : function(context) {
@@ -43,7 +43,7 @@ module.exports = function(bot) {
             this.say(context.from, ' * ' + key + ' : ' + bookmarks[key]);
          }
       }
-   });
+   });*/
    
    bot.command({
       name : ['bookmark.edit', 'bm.edit'],
