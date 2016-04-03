@@ -13,8 +13,8 @@ function talk(words) {
       return '';
    }
 
-   while (word != '__END__' && result.length < 20) {
-      if (result.length > 15 && word.__END__) {
+   while (word != '__END__' && result.length < 25) {
+      if (!words[word] || (result.length > 20 && words[word].__END__)) {
          break;
       }
 
