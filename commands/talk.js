@@ -67,8 +67,6 @@ module.exports = function(bot) {
          return;
       }
 
-      console.log('add line');
-
       addWord(words, '__START__', line[0]);
 
       for (var i = 0; i < line.length; ++i) {
