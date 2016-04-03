@@ -6,6 +6,7 @@ module.exports = function(bot) {
       security : 'admin',
       execute : function(context) {
          this.send('NICK', context.args[0]);
+         bot.nick = context.args[0];
       }
    });
    
