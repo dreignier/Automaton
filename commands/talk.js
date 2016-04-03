@@ -119,17 +119,17 @@ module.exports = function(bot) {
 
    bot.client.addListener('message', function(from, to, text) {
       if (text) {
-         if (text.toLowerCase().indexOf(bot.nick.toLowerCase()) !== -1) {
-            var str = talk(words['frenchwhine']);
-
-            if (str) {
-               bot.client.say(to, str);
-            }
-         }
-
          if (bot.options.talkative.some(function(channel) {
             return channel.toLowerCase() == to.replace('#', '').toLowerCase()
          })) {
+            if (text.toLowerCase().indexOf(bot.nick.toLowerCase()) !== -1) {
+               var str = talk(words[to.replace('#', '').toLowerCase()]);
+
+               if (str) {
+                  bot.client.say(to, str);
+               }
+            }
+         
             addLine(words[to.replace('#', '').toLowerCase()], text.split(' '));
          }
       }
