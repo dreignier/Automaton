@@ -5,7 +5,13 @@ function getRandomInt(min, max) {
    return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function talk(words, beginning) {
+function talk(words, beginning, tries) {
+   tries = tries || 0;
+
+   if (tries > 30) {
+      return 'Aucune inspiration';
+   }
+
    var result = [],
        word = '__START__';
 
@@ -41,9 +47,9 @@ function talk(words, beginning) {
       }
    }
 
-   if (result.length < 2) {
+   if (result.length - beginning.length < 2) {
       // Retry
-      return talk(words);
+      return talk(words, beginning, tries + 1);
    } else {
       return result.join(' ');   
    }
