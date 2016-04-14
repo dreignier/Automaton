@@ -27,19 +27,21 @@ function talk(words, beginning) {
          break;
       }
 
-      var random = getRandomInt(0, words[word].__TOTAL__ + 1);
+      var total = words[word].__TOTAL__ + 1;
 
       if (result.length - beginning.length < 2 && words[word].__END__) {
-         random -= words[word].__END__;
+         total -= words[word].__END__;
       }
 
-      if (random <= 0) {
+      if (total <= 1) {
          if (result.length - beginning.length <= 0) {
             return "Aucune inspiration";
          }
 
-         return result;
+         return result.join(' ');
       }
+
+      var random = getRandomInt(0, total);
 
       for (var key in words[word]) {
          if (key != '__TOTAL__') {
