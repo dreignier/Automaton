@@ -144,7 +144,7 @@ module.exports = function(bot) {
       name : ['guess'],
       help : "Devine la fin d'une phrase",
       execute : function(context) {
-         this.say(context.to, context.args.split(' '));
+         this.say(context.to, context.args);
       }
    });
 };
