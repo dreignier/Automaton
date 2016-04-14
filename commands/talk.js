@@ -5,12 +5,17 @@ function getRandomInt(min, max) {
    return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function talk(words) {
+function talk(words, beginning) {
    var result = [],
        word = '__START__';
 
    if (!words) {
       return '';
+   }
+
+   if (beginning) {
+      result = beginning;
+      word = _.last(beginning);
    }
 
    while (word != '__END__' && result.length < 25) {
@@ -132,6 +137,14 @@ module.exports = function(bot) {
          
             addLine(words[to.replace('#', '').toLowerCase()], text.split(' '));
          }
+      }
+   });
+
+   bot.command({
+      name : ['guess'],
+      help : "Devine la fin d'une phrase",
+      execute : function(context) {
+         this.say(context.to, context.args.split(' '));
       }
    });
 };
