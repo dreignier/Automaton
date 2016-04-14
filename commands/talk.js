@@ -14,13 +14,12 @@ function talk(words, beginning) {
    }
 
    if (beginning) {
-      result = beginning;
+      beginning = beginning.join(' ').trim().split(' ');
+      result = beginning.slice();
       word = _.last(beginning);
    } else {
       beginning = [];
    }
-
-   var empty = true;
 
    while (word != '__END__' && result.length < 25) {
       if (!words[word] || (result.length > 20 && words[word].__END__)) {
@@ -50,7 +49,6 @@ function talk(words, beginning) {
             if (random <= 0) {
                if (key != '__END__') {
                   result.push(key);
-                  empty = false;
                }
 
                word = key;
@@ -133,8 +131,6 @@ module.exports = function(bot) {
             addLine(words[channel], line);
          });
       });
-
-      fs.writeFileSync('./test.json', JSON.stringify(words, null, 4));
    });
 
    bot.client.addListener('message', function(from, to, text) {
@@ -144,7 +140,7 @@ module.exports = function(bot) {
          })) {
             if (text.toLowerCase().indexOf(bot.nick.toLowerCase()) !== -1) {
                var str = talk(words[to.replace('#', '').toLowerCase()]);
-
+               
                if (str) {
                   bot.client.say(to, str);
                }
