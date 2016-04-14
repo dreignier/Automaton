@@ -5,13 +5,7 @@ function getRandomInt(min, max) {
    return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function talk(words, beginning, tries) {
-   tries = tries || 0;
-
-   if (tries > 30) {
-      return 'Aucune inspiration';
-   }
-
+function talk(words, beginning) {
    var result = [],
        word = '__START__';
 
@@ -22,7 +16,11 @@ function talk(words, beginning, tries) {
    if (beginning) {
       result = beginning;
       word = _.last(beginning);
+   } else {
+      beginning = [];
    }
+
+   var empty = true;
 
    while (word != '__END__' && result.length < 25) {
       if (!words[word] || (result.length > 20 && words[word].__END__)) {
@@ -31,6 +29,18 @@ function talk(words, beginning, tries) {
 
       var random = getRandomInt(0, words[word].__TOTAL__ + 1);
 
+      if (result.length - beginning.length < 2 && words[word].__END__) {
+         random -= words[word].__END__;
+      }
+
+      if (random <= 0) {
+         if (result.length - beginning.length <= 0) {
+            return "Aucune inspiration";
+         }
+
+         return result;
+      }
+
       for (var key in words[word]) {
          if (key != '__TOTAL__') {
             random -= words[word][key];
@@ -38,7 +48,9 @@ function talk(words, beginning, tries) {
             if (random <= 0) {
                if (key != '__END__') {
                   result.push(key);
+                  empty = false;
                }
+
                word = key;
 
                break;
@@ -47,12 +59,7 @@ function talk(words, beginning, tries) {
       }
    }
 
-   if (result.length - beginning.length < 2) {
-      // Retry
-      return talk(words, beginning, tries + 1);
-   } else {
-      return result.join(' ');   
-   }
+   return result.join(' ');
 }
 
 module.exports = function(bot) {
