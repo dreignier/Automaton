@@ -33,17 +33,13 @@ function talk(words, beginning) {
       }
 
       if (total <= 1) {
-         if (result.length - beginning.length <= 0) {
-            return "Aucune inspiration";
-         }
-
-         return result.join(' ');
+         break;
       }
 
       var random = getRandomInt(0, total);
 
       for (var key in words[word]) {
-         if (key != '__TOTAL__' && !(result.length - beginning.length < 2 && key == '__END')) {
+         if (key != '__TOTAL__' && !(result.length - beginning.length < 2 && key == '__END__')) {
             random -= words[word][key];
 
             if (random <= 0) {
@@ -57,6 +53,10 @@ function talk(words, beginning) {
             }
          }
       }
+   }
+
+   if (result.length - beginning.length <= 0) {
+      return "Aucune inspiration";
    }
 
    return result.join(' ');
