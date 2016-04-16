@@ -43,7 +43,7 @@ function talk(words, beginning) {
       var random = getRandomInt(0, total);
 
       for (var key in words[word]) {
-         if (key != '__TOTAL__') {
+         if (key != '__TOTAL__' && !(result.length - beginning.length < 2 && key == '__END')) {
             random -= words[word][key];
 
             if (random <= 0) {
